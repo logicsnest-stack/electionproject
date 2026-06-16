@@ -82,17 +82,25 @@ WSGI_APPLICATION = 'elections_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 import os
+import os
+import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'elections',
-        'USER': 'postgres',
-        'PASSWORD': 'KAPSLOCK',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL")
+    )
 }
+###
+#DATABASES = {
+  #  'default': {
+  #      'ENGINE': 'django.db.backends.postgresql',
+    #    'NAME': 'elections',
+    #    'USER': 'postgres',
+      #  'PASSWORD': 'KAPSLOCK',
+     #   'HOST': 'localhost',
+       # 'PORT': '5432',
+  #  }
+#}
 
 
 # Password validation
