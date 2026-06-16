@@ -1,0 +1,132 @@
+{% extends 'results/base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="fw-bold">
+            Election News & Updates
+        </h2>
+
+    </div>
+
+    <div class="row">
+
+        {% for news in news_updates %}
+
+            <div class="col-md-6 mb-4">
+
+                <a href="{% url 'news_detail' news.id %}"
+                   class="text-decoration-none text-dark">
+
+                    <div class="card shadow-sm h-100 border-0">
+
+                        {% if news.image %}
+
+                            <img
+                                src="{{ news.image.url }}"
+                                class="card-img-top"
+                                style="height: 250px; object-fit: cover;"
+                            >
+
+                        {% endif %}
+
+                        <div class="card-body">
+
+                            {% if news.breaking %}
+
+                                <span class="badge bg-danger mb-2">
+                                    BREAKING
+                                </span>
+
+                            {% endif %}
+
+                            <h4 class="card-title fw-bold">
+                                {{ news.title }}
+                            </h4>
+
+                            <p class="text-muted small">
+                                {{ news.created_at|date:"F d, Y • H:i" }}
+                            </p>
+
+                            <div class="card-text">
+                                {{ news.content|safe|truncatewords_html:40 }}
+                            </div>
+
+                            <!-- FACEBOOK STYLE STATS -->
+                            <hr>
+
+                            <div class="d-flex justify-content-between text-muted small">
+
+                                <span>
+                                    👍 {{ news.reaction_count }} Reactions
+                                </span>
+
+                                <span>
+                                    💬 {{ news.comment_count }} Comments
+                                </span>
+
+                            </div>
+
+                            <hr>
+
+                            <!-- ACTION BUTTONS -->
+                            <div class="row text-center">
+
+                                <div class="col-4">
+                                    <span class="text-primary fw-semibold">
+                                        👍 Like
+                                    </span>
+                                </div>
+
+                                <div class="col-4">
+                                    <span class="text-danger fw-semibold">
+                                        ❤️ Love
+                                    </span>
+                                </div>
+
+                                <div class="col-4">
+                                    <span class="text-secondary fw-semibold">
+                                        💬 Comment
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="mt-3">
+
+                                <span class="btn btn-dark btn-sm w-100">
+                                    Read Full Article
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        {% empty %}
+
+            <div class="col-12">
+
+                <div class="alert alert-light border">
+
+                    No news articles available yet.
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
