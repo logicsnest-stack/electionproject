@@ -305,3 +305,29 @@ class Reaction(models.Model):
 
     def __str__(self):
         return self.reaction_type
+
+
+
+class Advertisement(models.Model):
+    POSITION_CHOICES = [
+        ("top", "Top Banner"),
+        ("middle", "Middle Banner"),
+        ("bottom", "Bottom Banner"),
+    ]
+
+    title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to="advertisements/")
+    link = models.URLField(blank=True)
+    position = models.CharField(max_length=20, choices=POSITION_CHOICES)
+
+    active = models.BooleanField(default=True)
+
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+
+    order = models.PositiveIntegerField(default=0)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["order", "-created_at"]

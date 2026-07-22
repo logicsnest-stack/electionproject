@@ -17,6 +17,7 @@
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
 
@@ -51,82 +52,143 @@
             margin-top: 80px;
         }
 
+/* ===================================
+   Advertisement Banner Slider
+=================================== */
+
+.banner-slider{
+    position: relative;
+    width: 100%;
+    margin: 30px 0;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 25px rgba(0,0,0,.12);
+    transition: all .3s ease;
+}
+
+.banner-slider:hover{
+    box-shadow: 0 14px 35px rgba(0,0,0,.18);
+}
+
+.banner-slide{
+    display: none;   /* Leave this for your JavaScript */
+}
+
+.banner-slide img{
+    display: block;
+    width: 100%;
+    height: 170px;
+    object-fit: contain;
+    border-radius: 16px;
+    transition: transform .4s ease;
+}
+
+/* Slight zoom when hovering */
+.banner-slide:hover img{
+    transform: scale(1.02);
+}
+
+/* Thin border */
+.banner-slider::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+/* Tablet */
+@media (max-width:992px){
+    .banner-slide img{
+        height: 150px;
+    }
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    .banner-slider{
+        margin: 20px 0;
+        border-radius: 12px;
+    }
+
+    .banner-slide img{
+        height: 120px;
+        border-radius: 12px;
+    }
+
+}
+
     </style>
 
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
 
-        <div class="container">
+    <div class="container">
 
-            <a class="navbar-brand"
-               href="/">
+        <a class="navbar-brand" href="/">
+            Zambia Elections
+        </a>
 
-                Zambia Elections
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
 
-            </a>
+            <span class="navbar-toggler-icon"></span>
 
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+        </button>
 
-                <span class="navbar-toggler-icon"></span>
+        <div class="collapse navbar-collapse" id="navbarNav">
 
-            </button>
+            <ul class="navbar-nav ms-auto">
 
-            <div class="collapse navbar-collapse"
-                 id="navbarNav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
 
-                <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'constituencies' %}">Constituencies</a>
+                </li>
 
-                    <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'news_list' %}">Media</a>
+                </li>
 
-                        <a class="nav-link"
-                           href="/">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                </li>
 
-                            Home
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'terms_and_conditions' %}">Terms and Conditions</a>
+                </li>
 
-                        </a>
-
-                    </li>
-
-
-                    <li class="nav-item">
-
-                        <a class="nav-link"
-                           href="{% url 'constituencies' %}">
-
-                            Constituencies
-
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="nav-link"
-                           href="{% url 'news_list' %}">
-
-                            Media and News
-
-                        </a>
-                        <li class="nav-item">
-    <a class="nav-link" href="/dashboard/">Admin Dashboard</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
 </li>
 
-                    </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/">Admin Dashboard</a>
+                </li>
+                {% endif %}
 
-                </ul>
-
-            </div>
+            </ul>
 
         </div>
 
-    </nav>
+    </div>
+
+</nav>
 
     <div class="hero-section text-center">
 
@@ -147,6 +209,20 @@
         </div>
 
     </div>
+
+{% if top_ads %}
+<div class="container my-4">
+    <div class="banner-slider">
+
+        {% for ad in top_ads %}
+        <a href="{{ ad.link }}" class="banner-slide" target="_blank">
+            <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+        </a>
+        {% endfor %}
+
+    </div>
+</div>
+{% endif %}
 
     <div class="container">
 
@@ -206,6 +282,20 @@
     </div>
 
 </section>
+
+{% if bottom_ads %}
+<div class="container my-4">
+    <div class="banner-slider">
+
+        {% for ad in bottom_ads %}
+            <a href="{{ ad.link }}" class="banner-slide" target="_blank">
+                <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+            </a>
+        {% endfor %}
+
+    </div>
+</div>
+{% endif %}
 
     <footer class="bg-dark text-white pt-5 pb-4">
 
@@ -318,6 +408,44 @@
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
     </script>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sliders = document.querySelectorAll(".banner-slider");
+
+    sliders.forEach(function(slider){
+
+        const slides = slider.querySelectorAll(".banner-slide");
+
+        if(slides.length === 0) return;
+
+        let current = 0;
+
+        slides.forEach(function(slide,index){
+            slide.style.display = index === 0 ? "block" : "none";
+        });
+
+        if(slides.length === 1) return;
+
+        setInterval(function(){
+
+            slides[current].style.display = "none";
+
+            current++;
+
+            if(current >= slides.length){
+                current = 0;
+            }
+
+            slides[current].style.display = "block";
+
+        },5000);
+
+    });
+
+});
+</script>
 
 </body>
 

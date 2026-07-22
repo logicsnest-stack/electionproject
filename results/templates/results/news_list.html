@@ -55,7 +55,6 @@
                                 {{ news.content|safe|truncatewords_html:40 }}
                             </div>
 
-                            <!-- FACEBOOK STYLE STATS -->
                             <hr>
 
                             <div class="d-flex justify-content-between text-muted small">
@@ -72,7 +71,6 @@
 
                             <hr>
 
-                            <!-- ACTION BUTTONS -->
                             <div class="row text-center">
 
                                 <div class="col-4">
@@ -126,6 +124,69 @@
         {% endfor %}
 
     </div>
+
+    <!-- PROFESSIONAL PAGINATION -->
+
+    {% if news_updates.has_other_pages %}
+
+    <nav class="mt-5">
+
+        <ul class="pagination justify-content-center">
+
+            {% if news_updates.has_previous %}
+
+            <li class="page-item">
+                <a class="page-link"
+                   href="?page=1">
+                    First
+                </a>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link"
+                   href="?page={{ news_updates.previous_page_number }}">
+                    Previous
+                </a>
+            </li>
+
+            {% endif %}
+
+            {% for num in page_range %}
+
+            <li class="page-item {% if news_updates.number == num %}active{% endif %}">
+
+                <a class="page-link"
+                   href="?page={{ num }}">
+                    {{ num }}
+                </a>
+
+            </li>
+
+            {% endfor %}
+
+            {% if news_updates.has_next %}
+
+            <li class="page-item">
+                <a class="page-link"
+                   href="?page={{ news_updates.next_page_number }}">
+                    Next
+                </a>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link"
+                   href="?page={{ news_updates.paginator.num_pages }}">
+                    Last
+                </a>
+            </li>
+
+            {% endif %}
+
+        </ul>
+
+    </nav>
+
+    {% endif %}
 
 </div>
 

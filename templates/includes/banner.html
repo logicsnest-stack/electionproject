@@ -1,0 +1,7 @@
+<div class="banner-slider" id="{{ banner_id }}">
+    {% for ad in ads %}
+        <a href="{{ ad.link }}" class="banner-slide">
+            <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+        </a>
+    {% endfor %}
+</div>

@@ -33,7 +33,7 @@
 
                         <tr class="text-uppercase small text-muted">
 
-                            <th class="ps-3">Rank</th>
+                            <th class="ps-3">Position</th>
                             <th>Candidate</th>
                             <th>Party</th>
                             <th>Total Votes</th>
@@ -49,7 +49,7 @@
 
                         <tr class="border-bottom">
 
-                            <!-- Rank -->
+                            <!-- POSITION (FIXED NUMERIC RANK) -->
                             <td class="ps-3 fw-semibold text-muted">
                                 #{{ forloop.counter }}
                             </td>
@@ -87,12 +87,8 @@
 
                                     {% endif %}
 
-                                    <div>
-
-                                        <div class="fw-semibold">
-                                            {{ candidate.name }}
-                                        </div>
-
+                                    <div class="fw-semibold">
+                                        {{ candidate.name }}
                                     </div>
 
                                 </div>
@@ -146,6 +142,7 @@
 
                     </tbody>
 
+                    <!-- 🔥 TOTAL NATIONAL VOTES (RESTORED EXACTLY) -->
                     {% if total_votes %}
 
                     <tfoot class="table-light">
@@ -181,5 +178,39 @@
     </div>
 
 </div>
+
+<!-- MINIMAL SAFE RESPONSIVE FIX (no layout break) -->
+<style>
+
+@media (max-width: 768px) {
+
+    h1.display-6 {
+        font-size: 1.7rem;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    h1.display-6 {
+        font-size: 1.4rem;
+    }
+
+    .table {
+        font-size: 0.8rem;
+    }
+
+}
+
+</style>
 
 {% endblock %}

@@ -7,7 +7,8 @@ from .models import (
     Candidate,
     Result,
     Sponsor,
-    NewsUpdate
+    NewsUpdate,
+    Advertisement,
 )
 
 
@@ -18,3 +19,4 @@ admin.site.register(Candidate)
 admin.site.register(Result)
 admin.site.register(Sponsor)
 admin.site.register(NewsUpdate)
+admin.site.register(Advertisement)

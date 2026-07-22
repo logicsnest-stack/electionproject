@@ -24,6 +24,8 @@ from django.db.models.functions import Coalesce
 from django.db.models import Value
 
 
+
+
 @cache_page(5)
 def home(request):
 
@@ -173,16 +175,42 @@ from django.db.models import Count
 from .models import NewsUpdate
 
 
+from django.shortcuts import render
+from django.db.models import Count
+from django.core.paginator import Paginator
+from django.views.decorators.cache import cache_page
+
+from django.core.paginator import Paginator
+from django.db.models import Count
+from django.shortcuts import render
+from django.views.decorators.cache import cache_page
+
+
 @cache_page(60)
 def news_list(request):
 
-    news_updates = NewsUpdate.objects.annotate(
+    news_queryset = NewsUpdate.objects.annotate(
         comment_count=Count('comments', distinct=True),
         reaction_count=Count('reactions', distinct=True)
     ).order_by('-created_at')
 
+    paginator = Paginator(news_queryset, 12)
+
+    page_number = request.GET.get('page')
+
+    news_updates = paginator.get_page(page_number)
+
+    current_page = news_updates.number
+    total_pages = paginator.num_pages
+
+    start_page = max(current_page - 2, 1)
+    end_page = min(current_page + 2, total_pages)
+
+    page_range = range(start_page, end_page + 1)
+
     context = {
-        'news_updates': news_updates
+        'news_updates': news_updates,
+        'page_range': page_range,
     }
 
     return render(
@@ -190,7 +218,6 @@ def news_list(request):
         'results/news_list.html',
         context
     )
-
 def news_detail(request, news_id):
 
     news = get_object_or_404(
@@ -272,6 +299,14 @@ def news_detail(request, news_id):
     )
 
 
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from django.views.decorators.cache import cache_page
+
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from django.views.decorators.cache import cache_page
+
 @cache_page(30)
 def constituencies(request):
 
@@ -290,9 +325,20 @@ def constituencies(request):
             name__icontains=query
         )
 
+    paginator = Paginator(
+        constituencies.order_by('-id'),
+        20
+    )
+
+    page_number = request.GET.get('page')
+
+    constituencies_page = paginator.get_page(
+        page_number
+    )
+
     constituency_data = []
 
-    for constituency in constituencies:
+    for constituency in constituencies_page:
 
         results = list(
             constituency.results.all().order_by(
@@ -320,7 +366,8 @@ def constituencies(request):
 
     context = {
         'constituency_data': constituency_data,
-        'query': query
+        'query': query,
+        'constituencies_page': constituencies_page
     }
 
     return render(
@@ -328,3 +375,31 @@ def constituencies(request):
         'results/constituencies.html',
         context
     )
+
+
+
+def privacy_policy(request):
+    return render(
+        request,
+        'results/privacy_policy.html'
+    )
+
+
+def terms_and_conditions(request):
+    return render(
+        request,
+        'results/terms_and_conditions.html'
+    )
+
+
+
+def about(request):
+    return render(
+        request,
+        'results/about.html'
+    )
+
+from django.shortcuts import render
+
+def contact(request):
+    return render(request, "results/contact.html")

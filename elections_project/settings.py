@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -70,6 +76,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'results.context_processors.sponsors_processor',
+                "results.context_processors.advertisements",
             ],
         },
     },
@@ -85,22 +92,19 @@ import os
 import os
 import dj_database_url
 
+# DATABASES = {
+#     'default': dj_database_url.parse(
+#         os.environ.get("DATABASE_URL")
+#     )
+# }
+
+import dj_database_url
+
 DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ.get("DATABASE_URL")
+    "default": dj_database_url.parse(
+        os.getenv("DATABASE_URL")
     )
 }
-###
-#DATABASES = {
-  #  'default': {
-  #      'ENGINE': 'django.db.backends.postgresql',
-    #    'NAME': 'elections',
-    #    'USER': 'postgres',
-      #  'PASSWORD': 'KAPSLOCK',
-     #   'HOST': 'localhost',
-       # 'PORT': '5432',
-  #  }
-#}
 
 
 # Password validation

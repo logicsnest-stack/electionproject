@@ -84,7 +84,7 @@
 
                 {% for result in item.top_three %}
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-12 col-sm-6 col-lg-4">
 
                     <div class="card border-0 shadow-sm h-100 rounded-4">
 
@@ -123,7 +123,7 @@
                                 height="120"
                                 loading="lazy"
                                 decoding="async"
-                                class="rounded-circle shadow-sm mb-3"
+                                class="rounded-circle shadow-sm mb-3 candidate-photo"
                                 style="object-fit: cover;"
                             >
 
@@ -416,6 +416,134 @@
 
     {% endfor %}
 
+<!-- START PAGINATION -->
+
+{% if constituencies_page.has_other_pages %}
+
+<nav class="mt-5">
+
+    <ul class="pagination justify-content-center">
+
+        {% if constituencies_page.has_previous %}
+        <li class="page-item">
+            <a class="page-link"
+               href="?page={{ constituencies_page.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">
+                Previous
+            </a>
+        </li>
+        {% endif %}
+
+        {% for num in constituencies_page.paginator.page_range %}
+
+            {% if constituencies_page.number == num %}
+
+                <li class="page-item active">
+                    <span class="page-link">{{ num }}</span>
+                </li>
+
+            {% elif num >= constituencies_page.number|add:"-2" and num <= constituencies_page.number|add:"2" %}
+
+                <li class="page-item">
+                    <a class="page-link"
+                       href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">
+                        {{ num }}
+                    </a>
+                </li>
+
+            {% endif %}
+
+        {% endfor %}
+
+        {% if constituencies_page.has_next %}
+        <li class="page-item">
+            <a class="page-link"
+               href="?page={{ constituencies_page.next_page_number }}{% if query %}&q={{ query }}{% endif %}">
+                Next
+            </a>
+        </li>
+        {% endif %}
+
+    </ul>
+
+</nav>
+
+{% endif %}
+
+<!-- END PAGINATION -->
+
 </div>
 
+<style>
+.candidate-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+
+    h1.display-6 {
+        font-size: 1.8rem;
+    }
+
+    .bg-light .d-flex {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .card-body {
+        padding: 1rem !important;
+    }
+
+    .card-body h2 {
+        font-size: 1.5rem;
+    }
+
+    .card-body h5 {
+        font-size: 1rem;
+        word-break: break-word;
+    }
+
+    .candidate-photo {
+        width: 90px;
+        height: 90px;
+    }
+
+    .accordion-button {
+        font-size: 0.95rem;
+    }
+
+    .table {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+    }
+
+    .card-body h2 {
+        font-size: 1.3rem;
+    }
+
+    .card-body h5 {
+        font-size: 0.95rem;
+    }
+
+    .accordion-button {
+        padding: 0.75rem;
+    }
+
+    .table {
+        font-size: 0.8rem;
+    }
+}
+</style>
 {% endblock %}
