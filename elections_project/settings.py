@@ -179,7 +179,7 @@ CACHES = {
     }
 }
 ##
-checking
+checking CHECKING
 
 MIDDLEWARE.insert(1, 'django.middleware.gzip.GZipMiddleware')
 
