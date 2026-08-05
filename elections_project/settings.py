@@ -23,11 +23,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-cloudinary.config(
-    cloud_name=os.getenv("Root"),
-    api_key=os.getenv("576563459992425"),
-    api_secret=os.getenv("31BWDYF0exn4fpwuc8fhhVfobQ8"),
-)
 
 
 # Quick-start development settings - unsuitable for production
@@ -58,8 +53,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'django.contrib.humanize',
     "django.contrib.sitemaps",
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -161,15 +154,13 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 STORAGES = {
-
     "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
 
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
-
 }
 
 # Default primary key field type
