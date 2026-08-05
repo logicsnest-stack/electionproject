@@ -403,3 +403,19 @@ from django.shortcuts import render
 
 def contact(request):
     return render(request, "results/contact.html")
+
+
+
+
+
+from django.http import HttpResponse
+
+
+def robots_txt(request):
+    lines = [
+        "User-Agent: *",
+        "Allow: /",
+        "",
+        "Sitemap: https://zambiaelections.online/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")

@@ -27,10 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dhtsy4yxox*%#!+j__r3y@#@7zzrc%#iw*wqc9qiy%(1#qtm^p'
+SECRET_KEY = SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = ["*"]
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'results',
     'ckeditor',
     'django.contrib.humanize',
+    "django.contrib.sitemaps",
 ]
 
 MIDDLEWARE = [

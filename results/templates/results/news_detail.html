@@ -259,4 +259,53 @@
 
 </style>
 
+<script type="application/ld+json">
+
+{
+    "@context": "https://schema.org",
+
+    "@type": "NewsArticle",
+
+    "headline": "{{ news.title|escapejs }}",
+
+    "articleBody": "{{ news.content|striptags|truncatewords:50|escapejs }}",
+
+    "datePublished": "{{ news.created_at|date:'c' }}",
+
+    "dateModified": "{{ news.created_at|date:'c' }}",
+
+    "image": [
+        "{% if news.image %}https://zambiaelections.online{{ news.image.url }}{% endif %}"
+    ],
+
+    "author": {
+
+        "@type": "Organization",
+
+        "name": "Zambia Elections"
+
+    },
+
+    "publisher": {
+
+        "@type": "Organization",
+
+        "name": "Zambia Elections",
+
+        "url": "https://zambiaelections.online"
+
+    },
+
+    "mainEntityOfPage": {
+
+        "@type": "WebPage",
+
+        "@id": "https://zambiaelections.online{{ request.path }}"
+
+    }
+
+}
+
+</script>
+
 {% endblock %}

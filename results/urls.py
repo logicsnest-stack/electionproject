@@ -53,5 +53,10 @@ urlpatterns = [
     views.constituencies,
     name='constituencies'
 ),
+    path(
+    "robots.txt",
+    views.robots_txt,
+    name="robots_txt"
+),
 
 ]
