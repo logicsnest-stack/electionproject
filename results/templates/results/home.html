@@ -19,6 +19,12 @@
         </p>
 
     </div>
+    {% if current_song %}
+<audio controls preload="none">
+    <source src="{{ current_song.audio.url }}" type="audio/mpeg">
+</audio>
+{% endif %}
+
 
     <!-- Results Card -->
     <div class="card border-0 shadow-lg rounded-4">
