@@ -49,7 +49,8 @@ def home(request):
 
     context = {
         'national_results': national_results,
-        'total_votes': total_votes
+        'total_votes': total_votes,
+        'current_song': current_song,
     }
 
     return render(
