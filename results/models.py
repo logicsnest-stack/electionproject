@@ -334,11 +334,10 @@ class Advertisement(models.Model):
 
 
 
-
-class Song(models.Model):
+class Music(models.Model):
     title = models.CharField(max_length=200)
     artist = models.CharField(max_length=200, blank=True)
-    audio = models.FileField(upload_to="songs/")
+    audio = models.FileField(upload_to="music/")
     active = models.BooleanField(default=False)
 
     def __str__(self):

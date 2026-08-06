@@ -15,7 +15,7 @@ from .models import (
     NewsUpdate,
     Comment,
     Reaction,
-    Song
+    Music,
 )
 
 from django.views.decorators.cache import cache_page
@@ -29,7 +29,7 @@ from django.db.models import Value
 
 @cache_page(5)
 def home(request):
-    current_song = Song.objects.filter(active=True).first()
+    current_song = Music.objects.filter(active=True).first()
 
     national_results = Candidate.objects.select_related(
         'party'
