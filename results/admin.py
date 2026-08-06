@@ -9,6 +9,7 @@ from .models import (
     Sponsor,
     NewsUpdate,
     Advertisement,
+    Song,
 )
 
 
@@ -20,3 +21,4 @@ admin.site.register(Result)
 admin.site.register(Sponsor)
 admin.site.register(NewsUpdate)
 admin.site.register(Advertisement)
+admin.site.register(Song)

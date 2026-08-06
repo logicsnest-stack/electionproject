@@ -297,6 +297,11 @@
         </div>
 
     </div>
+{% if current_song %}
+<audio controls preload="none">
+    <source src="{{ current_song.audio.url }}" type="audio/mpeg">
+</audio>
+{% endif %}
 
 {% if top_ads %}
 <div class="container my-4">
