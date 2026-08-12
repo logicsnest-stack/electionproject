@@ -1,43 +1,58 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9421752458429638"
-     crossorigin="anonymous"></script>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YNT69PS25L"></script>
 
-<script>
-    window.dataLayer = window.dataLayer || [];
+    <!-- Google AdSense -->
+    <script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9421752458429638"
+        crossorigin="anonymous">
+    </script>
 
-    function gtag(){
-        dataLayer.push(arguments);
-    }
+    <!-- Google Analytics -->
+    <script async
+        src="https://www.googletagmanager.com/gtag/js?id=G-YNT69PS25L">
+    </script>
 
-    gtag('js', new Date());
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    gtag('config', 'G-YNT69PS25L');
-</script> 
-    <meta name="google-site-verification" content="dM4gXEtjBmzq2yo1oFPK6xITweowcU2LCJxfi2ff1bg" />
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-YNT69PS25L');
+    </script>
+
+    <!-- Google Search Console -->
+    <meta name="google-site-verification"
+          content="dM4gXEtjBmzq2yo1oFPK6xITweowcU2LCJxfi2ff1bg">
 
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
+    <!-- PAGE TITLE -->
     <title>
         {% block title %}
-        Zambia Elections 2026 | Live Presidential Results
+        Zambia Elections 2026 | Live Election Results
         {% endblock %}
     </title>
 
+    <!-- DESCRIPTION -->
     <meta
         name="description"
-        content="{% block meta_description %}Live Zambia Presidential Election 2026 results, constituency updates, candidate standings, breaking news and official vote totals.{% endblock %}">
+        content="{% block meta_description %}Zambia Elections 2026 — live presidential election results, constituency results, candidate standings, vote totals, election news and updates from across Zambia.{% endblock %}">
 
+    <!-- KEYWORDS -->
     <meta
         name="keywords"
-        content="{% block meta_keywords %}Zambia Elections, Zambia Presidential Election 2026, ECZ Results, Election Results Zambia, Constituencies, Candidates{% endblock %}">
+        content="{% block meta_keywords %}Zambia Elections 2026, Zambia Election Results, Zambia Presidential Election 2026, Live Election Results Zambia, ECZ Results, Zambia Constituency Results, Zambia Candidates, Zambia Election News{% endblock %}">
 
     <meta
         name="author"
@@ -47,21 +62,26 @@
         name="robots"
         content="index, follow">
 
+    <!-- CANONICAL URL -->
     <link
         rel="canonical"
         href="https://zambiaelections.online{{ request.path }}">
 
-    <!-- Open Graph -->
+    <!-- ================================================= -->
+    <!-- OPEN GRAPH / FACEBOOK / WHATSAPP -->
+    <!-- ================================================= -->
 
-    <meta property="og:type" content="website">
+    <meta
+        property="og:type"
+        content="website">
 
     <meta
         property="og:title"
-        content="{% block og_title %}Zambia Elections 2026{% endblock %}">
+        content="{% block og_title %}Zambia Elections 2026 | Live Election Results{% endblock %}">
 
     <meta
         property="og:description"
-        content="{% block og_description %}Live presidential election results, constituency updates and election news.{% endblock %}">
+        content="{% block og_description %}Follow Zambia Elections 2026 with live presidential election results, constituency updates, candidate standings, vote totals and election news.{% endblock %}">
 
     <meta
         property="og:url"
@@ -71,7 +91,22 @@
         property="og:site_name"
         content="Zambia Elections">
 
-    <!-- Twitter -->
+    <!-- SOCIAL SHARING IMAGE -->
+    <meta
+        property="og:image"
+        content="https://zambiaelections.online{% static 'images/election-results-share.PNG' %}">
+
+    <meta
+        property="og:image:alt"
+        content="Zambia Elections 2026 Live Election Results">
+
+    <meta
+        property="og:image:type"
+        content="image/jpeg">
+
+    <!-- ================================================= -->
+    <!-- TWITTER / X -->
+    <!-- ================================================= -->
 
     <meta
         name="twitter:card"
@@ -79,19 +114,29 @@
 
     <meta
         name="twitter:title"
-        content="{% block twitter_title %}Zambia Elections 2026{% endblock %}">
+        content="{% block twitter_title %}Zambia Elections 2026 | Live Election Results{% endblock %}">
 
     <meta
         name="twitter:description"
-        content="{% block twitter_description %}Live presidential election results from Zambia.{% endblock %}">
+        content="{% block twitter_description %}Live Zambia presidential election results, constituency updates, candidate standings and election news.{% endblock %}">
+
+    <meta
+        name="twitter:image"
+        content="https://zambiaelections.online{% static 'images/election-results-share.PNG' %}">
+
+    <meta
+        name="twitter:image:alt"
+        content="Zambia Elections 2026 Live Election Results">
+
+    <!-- ================================================= -->
+    <!-- BOOTSTRAP -->
+    <!-- ================================================= -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Bootstrap Icons -->
 
     <link
         rel="stylesheet"
@@ -109,11 +154,12 @@
         }
 
         .hero-section {
-            background: linear-gradient(
-                rgba(0,0,0,0.7),
-                rgba(0,0,0,0.7)
-            ),
-            url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=1600');
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.7),
+                    rgba(0,0,0,0.7)
+                ),
+                url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=1600');
 
             background-size: cover;
             background-position: center;
@@ -130,170 +176,265 @@
             margin-top: 80px;
         }
 
-/* ===================================
-   Advertisement Banner Slider
-=================================== */
 
-.banner-slider{
-    position: relative;
-    width: 100%;
-    margin: 30px 0;
-    overflow: hidden;
-    border-radius: 16px;
-    background: #fff;
-    box-shadow: 0 8px 25px rgba(0,0,0,.12);
-    transition: all .3s ease;
-}
+        /* ===================================
+           Advertisement Banner Slider
+        =================================== */
 
-.banner-slider:hover{
-    box-shadow: 0 14px 35px rgba(0,0,0,.18);
-}
+        .banner-slider {
+            position: relative;
+            width: 100%;
+            margin: 30px 0;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,.12);
+            transition: all .3s ease;
+        }
 
-.banner-slide{
-    display: none;   /* Leave this for your JavaScript */
-}
+        .banner-slider:hover {
+            box-shadow: 0 14px 35px rgba(0,0,0,.18);
+        }
 
-.banner-slide img{
-    display: block;
-    width: 100%;
-    height: 170px;
-    object-fit: contain;
-    border-radius: 16px;
-    transition: transform .4s ease;
-}
+        .banner-slide {
+            display: none;
+        }
 
-/* Slight zoom when hovering */
-.banner-slide:hover img{
-    transform: scale(1.02);
-}
+        .banner-slide img {
+            display: block;
+            width: 100%;
+            height: 170px;
+            object-fit: contain;
+            border-radius: 16px;
+            transition: transform .4s ease;
+        }
 
-/* Thin border */
-.banner-slider::after{
-    content: "";
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(255,255,255,.25);
-    border-radius: 16px;
-    pointer-events: none;
-}
+        .banner-slide:hover img {
+            transform: scale(1.02);
+        }
 
-/* Tablet */
-@media (max-width:992px){
-    .banner-slide img{
-        height: 150px;
-    }
-}
+        .banner-slider::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 16px;
+            pointer-events: none;
+        }
 
-/* Mobile */
-@media (max-width:768px){
+        /* Tablet */
 
-    .banner-slider{
-        margin: 20px 0;
-        border-radius: 12px;
-    }
+        @media (max-width: 992px) {
 
-    .banner-slide img{
-        height: 120px;
-        border-radius: 12px;
-    }
+            .banner-slide img {
+                height: 150px;
+            }
 
-}
+        }
+
+        /* Mobile */
+
+        @media (max-width: 768px) {
+
+            .banner-slider {
+                margin: 20px 0;
+                border-radius: 12px;
+            }
+
+            .banner-slide img {
+                height: 120px;
+                border-radius: 12px;
+            }
+
+        }
 
     </style>
 
 
-    <!-- Schema.org Structured Data -->
+    <!-- ================================================= -->
+    <!-- SCHEMA.ORG STRUCTURED DATA -->
+    <!-- ================================================= -->
 
-<script type="application/ld+json">
+    <script type="application/ld+json">
 
-{
-  "@context": "https://schema.org",
+    {
+        "@context": "https://schema.org",
 
-  "@type": "WebSite",
+        "@type": "WebSite",
 
-  "name": "Zambia Elections 2026",
+        "name": "Zambia Elections 2026",
 
-  "url": "https://zambiaelections.online",
+        "url": "https://zambiaelections.online",
 
-  "description": "Zambia Elections 2026 provides live presidential election results, constituency updates, candidate information, political party information and election news.",
+        "description": "Zambia Elections 2026 provides live presidential election results, constituency updates, candidate information, political party information and election news.",
 
-  "publisher": {
-    "@type": "Organization",
+        "publisher": {
+            "@type": "Organization",
 
-    "name": "Zambia Elections",
+            "name": "Zambia Elections",
 
-    "url": "https://zambiaelections.online"
-  }
-}
+            "url": "https://zambiaelections.online"
+        }
+    }
 
-</script>
+    </script>
 
 </head>
 
+
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
 
-    <div class="container">
+    <!-- ================================================= -->
+    <!-- NAVIGATION -->
+    <!-- ================================================= -->
 
-        <a class="navbar-brand" href="/">
-            Zambia Elections
-        </a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
 
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav">
+        <div class="container">
 
-            <span class="navbar-toggler-icon"></span>
+            <a class="navbar-brand" href="/">
+                Zambia Elections
+            </a>
 
-        </button>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
 
-        <div class="collapse navbar-collapse" id="navbarNav">
+                <span class="navbar-toggler-icon"></span>
 
-            <ul class="navbar-nav ms-auto">
+            </button>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'constituencies' %}">Constituencies</a>
-                </li>
+            <div
+                class="collapse navbar-collapse"
+                id="navbarNav">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'news_list' %}">Media</a>
-                </li>
+                <ul class="navbar-nav ms-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'privacy_policy' %}">Privacy Policy</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'terms_and_conditions' %}">Terms and Conditions</a>
-                </li>
+                    <li class="nav-item">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}">About</a>
-                </li>
-                <li class="nav-item">
-    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-</li>
+                        <a
+                            class="nav-link"
+                            href="/">
 
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/dashboard/">Admin Dashboard</a>
-                </li>
-                {% endif %}
+                            Home
 
-            </ul>
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{% url 'constituencies' %}">
+
+                            Constituencies
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{% url 'news_list' %}">
+
+                            Media
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{% url 'privacy_policy' %}">
+
+                            Privacy Policy
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{% url 'terms_and_conditions' %}">
+
+                            Terms and Conditions
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{% url 'about' %}">
+
+                            About
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="{% url 'contact' %}">
+
+                            Contact
+
+                        </a>
+
+                    </li>
+
+
+                    {% if user.is_authenticated %}
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="/dashboard/">
+
+                            Admin Dashboard
+
+                        </a>
+
+                    </li>
+
+                    {% endif %}
+
+
+                </ul>
+
+            </div>
 
         </div>
 
-    </div>
+    </nav>
 
-</nav>
+
+    <!-- ================================================= -->
+    <!-- HERO -->
+    <!-- ================================================= -->
 
     <div class="hero-section text-center">
 
@@ -307,7 +448,7 @@
 
             <p class="lead mt-3">
 
-                Live National Results & Election Updates
+                Live Election Results & Updates
 
             </p>
 
@@ -315,19 +456,42 @@
 
     </div>
 
-{% if top_ads %}
-<div class="container my-4">
-    <div class="banner-slider">
 
-        {% for ad in top_ads %}
-        <a href="{{ ad.link }}" class="banner-slide" target="_blank">
-            <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
-        </a>
-        {% endfor %}
+    <!-- ================================================= -->
+    <!-- TOP ADVERTISEMENTS -->
+    <!-- ================================================= -->
+
+    {% if top_ads %}
+
+    <div class="container my-4">
+
+        <div class="banner-slider">
+
+            {% for ad in top_ads %}
+
+            <a
+                href="{{ ad.link }}"
+                class="banner-slide"
+                target="_blank">
+
+                <img
+                    src="{{ ad.image.url }}"
+                    alt="{{ ad.title }}">
+
+            </a>
+
+            {% endfor %}
+
+        </div>
 
     </div>
-</div>
-{% endif %}
+
+    {% endif %}
+
+
+    <!-- ================================================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ================================================= -->
 
     <div class="container">
 
@@ -336,49 +500,102 @@
 
     </div>
 
+
+    <!-- ================================================= -->
+    <!-- SPONSORS -->
+    <!-- ================================================= -->
+
     <section class="py-4 bg-white border-top border-bottom">
 
-    <div class="container text-center">
+        <div class="container text-center">
 
-        <h5 class="fw-bold mb-4">
-            Sponsored By
-        </h5>
+            <h5 class="fw-bold mb-4">
+                Sponsored By
+            </h5>
 
-        <div class="d-flex flex-wrap justify-content-center align-items-center gap-4">
 
-            {% for sponsor in footer_sponsors %}
+            <div
+                class="d-flex flex-wrap justify-content-center align-items-center gap-4">
 
-                <div style="width: 120px; height: 80px;">
+
+                {% for sponsor in footer_sponsors %}
+
+
+                <div
+                    style="width: 120px; height: 80px;">
+
 
                     {% if sponsor.website %}
 
-                        <a href="{{ sponsor.website }}" target="_blank">
-
-                            <img
-                                src="{{ sponsor.logo.url }}"
-                                class="img-fluid w-100 h-100"
-                                style="object-fit: contain;"
-                            >
-
-                        </a>
-
-                    {% else %}
+                    <a
+                        href="{{ sponsor.website }}"
+                        target="_blank">
 
                         <img
                             src="{{ sponsor.logo.url }}"
                             class="img-fluid w-100 h-100"
                             style="object-fit: contain;"
-                        >
+                            alt="{{ sponsor.name }}">
+
+                    </a>
+
+
+                    {% else %}
+
+                    <img
+                        src="{{ sponsor.logo.url }}"
+                        class="img-fluid w-100 h-100"
+                        style="object-fit: contain;"
+                        alt="{{ sponsor.name }}">
 
                     {% endif %}
 
+
                 </div>
 
-            {% empty %}
+
+                {% empty %}
+
 
                 <p class="text-muted mb-0">
+
                     No sponsors available yet.
+
                 </p>
+
+
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================================= -->
+    <!-- BOTTOM ADVERTISEMENTS -->
+    <!-- ================================================= -->
+
+    {% if bottom_ads %}
+
+    <div class="container my-4">
+
+        <div class="banner-slider">
+
+            {% for ad in bottom_ads %}
+
+            <a
+                href="{{ ad.link }}"
+                class="banner-slide"
+                target="_blank">
+
+                <img
+                    src="{{ ad.image.url }}"
+                    alt="{{ ad.title }}">
+
+            </a>
 
             {% endfor %}
 
@@ -386,27 +603,19 @@
 
     </div>
 
-</section>
+    {% endif %}
 
-{% if bottom_ads %}
-<div class="container my-4">
-    <div class="banner-slider">
 
-        {% for ad in bottom_ads %}
-            <a href="{{ ad.link }}" class="banner-slide" target="_blank">
-                <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
-            </a>
-        {% endfor %}
-
-    </div>
-</div>
-{% endif %}
+    <!-- ================================================= -->
+    <!-- FOOTER -->
+    <!-- ================================================= -->
 
     <footer class="bg-dark text-white pt-5 pb-4">
 
         <div class="container">
 
             <div class="row">
+
 
                 <div class="col-md-4 mb-4">
 
@@ -426,6 +635,7 @@
 
                 </div>
 
+
                 <div class="col-md-4 mb-4">
 
                     <h5 class="fw-bold mb-3">
@@ -434,12 +644,15 @@
 
                     </h5>
 
+
                     <ul class="list-unstyled">
+
 
                         <li class="mb-2">
 
-                            <a href="/"
-                               class="text-decoration-none text-light">
+                            <a
+                                href="/"
+                                class="text-decoration-none text-light">
 
                                 Home
 
@@ -447,10 +660,12 @@
 
                         </li>
 
+
                         <li class="mb-2">
 
-                            <a href="#"
-                               class="text-decoration-none text-light">
+                            <a
+                                href="#"
+                                class="text-decoration-none text-light">
 
                                 Presidential Results
 
@@ -458,10 +673,12 @@
 
                         </li>
 
+
                         <li class="mb-2">
 
-                            <a href="#"
-                               class="text-decoration-none text-light">
+                            <a
+                                href="#"
+                                class="text-decoration-none text-light">
 
                                 Live Updates
 
@@ -469,9 +686,11 @@
 
                         </li>
 
+
                     </ul>
 
                 </div>
+
 
                 <div class="col-md-4 mb-4">
 
@@ -491,9 +710,12 @@
 
                 </div>
 
+
             </div>
 
+
             <hr class="border-secondary">
+
 
             <div class="text-center">
 
@@ -506,51 +728,89 @@
 
             </div>
 
+
         </div>
 
     </footer>
+
+
+    <!-- ================================================= -->
+    <!-- BOOTSTRAP JAVASCRIPT -->
+    <!-- ================================================= -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
     </script>
 
+
+    <!-- ================================================= -->
+    <!-- ADVERTISEMENT SLIDER JAVASCRIPT -->
+    <!-- ================================================= -->
+
     <script>
-document.addEventListener("DOMContentLoaded", function () {
 
-    const sliders = document.querySelectorAll(".banner-slider");
+    document.addEventListener("DOMContentLoaded", function () {
 
-    sliders.forEach(function(slider){
+        const sliders =
+            document.querySelectorAll(".banner-slider");
 
-        const slides = slider.querySelectorAll(".banner-slide");
 
-        if(slides.length === 0) return;
+        sliders.forEach(function(slider) {
 
-        let current = 0;
 
-        slides.forEach(function(slide,index){
-            slide.style.display = index === 0 ? "block" : "none";
-        });
+            const slides =
+                slider.querySelectorAll(".banner-slide");
 
-        if(slides.length === 1) return;
 
-        setInterval(function(){
-
-            slides[current].style.display = "none";
-
-            current++;
-
-            if(current >= slides.length){
-                current = 0;
+            if (slides.length === 0) {
+                return;
             }
 
-            slides[current].style.display = "block";
 
-        },5000);
+            let current = 0;
+
+
+            slides.forEach(function(slide, index) {
+
+                slide.style.display =
+                    index === 0 ? "block" : "none";
+
+            });
+
+
+            if (slides.length === 1) {
+                return;
+            }
+
+
+            setInterval(function() {
+
+
+                slides[current].style.display = "none";
+
+
+                current++;
+
+
+                if (current >= slides.length) {
+
+                    current = 0;
+
+                }
+
+
+                slides[current].style.display = "block";
+
+
+            }, 5000);
+
+
+        });
 
     });
 
-});
-</script>
+    </script>
+
 
 </body>
 
