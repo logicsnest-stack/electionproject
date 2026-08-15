@@ -1,103 +1,80 @@
-{% extends 'results/base.html' %}
+<h2 class="mb-4">Results Entry Dashboard</h2>
 
-{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 
-<div class="container mt-4">
+<div class="card shadow-sm">
 
-    <h2 class="mb-4">Results Entry Dashboard</h2>
+    <div class="card-body">
 
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
+        <form method="POST">
+            {% csrf_token %}
 
-    <div class="card shadow-sm">
+            <div class="row">
 
-        <div class="card-body">
+                <div class="col-md-4 mb-3">
 
-            <form method="POST">
-                {% csrf_token %}
+                    <label class="form-label">Constituency</label>
 
-                <div class="row">
+                    <select id="constituency-select"
+                            name="constituency"
+                            class="form-control"
+                            required>
 
-                    <div class="col-md-4 mb-3">
+                        <option value="">Select Constituency</option>
 
-                        <label class="form-label">Constituency</label>
+                        {% for c in constituencies %}
+                            <option value="{{ c.id }}">
+                                {{ c.name }} ({{ c.province.name }})
+                            </option>
+                        {% endfor %}
 
-                        <select id="constituency-select"
-                                name="constituency"
-                                class="form-control"
-                                required>
-
-                            <option value="">Select Constituency</option>
-
-                            {% for c in constituencies %}
-                                <option value="{{ c.id }}">
-                                    {{ c.name }} ({{ c.province.name }})
-                                </option>
-                            {% endfor %}
-
-                        </select>
-
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-
-                        <label class="form-label">Candidate</label>
-
-                        <select name="candidate" class="form-control" required>
-
-                            <option value="">Select Candidate</option>
-
-                            {% for cand in candidates %}
-                                <option value="{{ cand.id }}">
-                                    {{ cand.name }} ({{ cand.party.abbreviation }})
-                                </option>
-                            {% endfor %}
-
-                        </select>
-
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-
-                        <label class="form-label">Votes</label>
-
-                        <input type="number" name="votes" class="form-control" required>
-
-                    </div>
+                    </select>
 
                 </div>
 
-                <button class="btn btn-dark w-100">
-                    Save / Update Result
-                </button>
+                <div class="col-md-4 mb-3">
 
-            </form>
+                    <label class="form-label">Candidate</label>
 
-        </div>
+                    <select name="candidate" class="form-control" required>
+
+                        <option value="">Select Candidate</option>
+
+                        {% for cand in candidates %}
+                            <option value="{{ cand.id }}">
+                                {{ cand.name }} ({{ cand.party.abbreviation }})
+                            </option>
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">Votes</label>
+
+                    <input type="number"
+                           name="votes"
+                           class="form-control"
+                           required>
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-dark w-100">
+                Save / Update Result
+            </button>
+
+        </form>
 
     </div>
 
 </div>
-
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
-
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $('#constituency-select').select2({
-            placeholder: 'Search Constituency',
-            allowClear: true,
-            width: '100%'
-        });
-    });
-</script>
-
-{% endblock %}
