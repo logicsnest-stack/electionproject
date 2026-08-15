@@ -50,6 +50,31 @@
             margin-top: 80px;
         }
 
+        .search-results {
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            max-height: 250px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .search-result-item {
+            padding: 10px 12px;
+            cursor: pointer;
+        }
+
+        .search-result-item:hover {
+            background-color: #f1f1f1;
+        }
+
+        .constituency-wrapper {
+            position: relative;
+        }
+
     </style>
 
 </head>
@@ -84,63 +109,44 @@
             <ul class="navbar-nav ms-auto">
 
                 <li class="nav-item">
-
-                    <a class="nav-link" href="/">
-                        Home
-                    </a>
-
+                    <a class="nav-link" href="/">Home</a>
                 </li>
 
-
                 <li class="nav-item">
-
                     <a class="nav-link"
                        href="{% url 'constituencies' %}">
                         Constituencies
                     </a>
-
                 </li>
 
-
                 <li class="nav-item">
-
                     <a class="nav-link"
                        href="{% url 'news_list' %}">
                         Media
                     </a>
-
                 </li>
 
-
                 <li class="nav-item">
-
                     <a class="nav-link"
                        href="{% url 'about' %}">
                         About
                     </a>
-
                 </li>
 
-
                 <li class="nav-item">
-
                     <a class="nav-link"
                        href="{% url 'contact' %}">
                         Contact
                     </a>
-
                 </li>
-
 
                 {% if user.is_authenticated %}
 
                 <li class="nav-item">
-
                     <a class="nav-link"
                        href="/dashboard/">
                         Dashboard
                     </a>
-
                 </li>
 
                 {% endif %}
@@ -155,10 +161,9 @@
 
 
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 
 <div class="container dashboard-container">
-
 
     <h2 class="mb-4">
         Results Entry Dashboard
@@ -170,9 +175,7 @@
         {% for message in messages %}
 
             <div class="alert alert-success">
-
                 {{ message }}
-
             </div>
 
         {% endfor %}
@@ -180,11 +183,9 @@
     {% endif %}
 
 
-
     <div class="card shadow-sm">
 
         <div class="card-body p-4">
-
 
             <form method="POST">
 
@@ -202,30 +203,44 @@
                             Constituency
                         </label>
 
+                        <div class="constituency-wrapper">
 
-                        <select
-                            id="constituency-select"
-                            name="constituency"
-                            class="form-control"
-                            required>
+                            <input
+                                type="text"
+                                id="constituency-search"
+                                class="form-control"
+                                placeholder="Type constituency..."
+                                autocomplete="off"
+                                required>
 
-                            <option value="">
-                                Select Constituency
-                            </option>
+                            <input
+                                type="hidden"
+                                id="constituency-id"
+                                name="constituency">
 
 
-                            {% for c in constituencies %}
+                            <div
+                                id="constituency-results"
+                                class="search-results">
 
-                                <option value="{{ c.id }}">
+                                {% for c in constituencies %}
 
-                                    {{ c.name }}
-                                    ({{ c.province.name }})
+                                    <div
+                                        class="search-result-item"
+                                        data-id="{{ c.id }}"
+                                        data-name="{{ c.name|lower }}"
+                                        data-display="{{ c.name }} ({{ c.province.name }})">
 
-                                </option>
+                                        {{ c.name }}
+                                        ({{ c.province.name }})
 
-                            {% endfor %}
+                                    </div>
 
-                        </select>
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -239,7 +254,6 @@
                             Candidate
                         </label>
 
-
                         <select
                             name="candidate"
                             class="form-control"
@@ -248,7 +262,6 @@
                             <option value="">
                                 Select Candidate
                             </option>
-
 
                             {% for cand in candidates %}
 
@@ -275,7 +288,6 @@
                             Votes
                         </label>
 
-
                         <input
                             type="number"
                             name="votes"
@@ -289,7 +301,6 @@
                 </div>
 
 
-
                 <button
                     type="submit"
                     class="btn btn-dark w-100">
@@ -298,14 +309,11 @@
 
                 </button>
 
-
             </form>
-
 
         </div>
 
     </div>
-
 
 </div>
 
@@ -319,7 +327,6 @@
 
         <div class="row">
 
-
             <div class="col-md-4 mb-4">
 
                 <h5 class="fw-bold mb-3">
@@ -327,15 +334,12 @@
                 </h5>
 
                 <p>
-
                     Live presidential election results,
                     constituency updates, party standings
                     and national vote totals.
-
                 </p>
 
             </div>
-
 
 
             <div class="col-md-4 mb-4">
@@ -347,44 +351,29 @@
                 <ul class="list-unstyled">
 
                     <li class="mb-2">
-
                         <a href="/"
                            class="text-decoration-none text-light">
-
                             Home
-
                         </a>
-
                     </li>
 
-
                     <li class="mb-2">
-
                         <a href="{% url 'constituencies' %}"
                            class="text-decoration-none text-light">
-
                             Constituencies
-
                         </a>
-
                     </li>
 
-
                     <li class="mb-2">
-
                         <a href="{% url 'news_list' %}"
                            class="text-decoration-none text-light">
-
                             News
-
                         </a>
-
                     </li>
 
                 </ul>
 
             </div>
-
 
 
             <div class="col-md-4 mb-4">
@@ -394,35 +383,27 @@
                 </h5>
 
                 <p>
-
                     Election results are updated
                     manually as official constituency
                     tallies are received.
-
                 </p>
 
             </div>
 
-
         </div>
-
 
 
         <hr class="border-secondary">
 
 
-
         <div class="text-center">
 
             <p class="mb-0">
-
                 © 2026 Zambia Elections.
                 All Rights Reserved.
-
             </p>
 
         </div>
-
 
     </div>
 
@@ -430,10 +411,141 @@
 
 
 
-<!-- BOOTSTRAP JAVASCRIPT -->
-
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searchInput =
+        document.getElementById("constituency-search");
+
+    const hiddenInput =
+        document.getElementById("constituency-id");
+
+    const resultsBox =
+        document.getElementById("constituency-results");
+
+    const items =
+        document.querySelectorAll(".search-result-item");
+
+
+    searchInput.addEventListener("input", function () {
+
+        const search =
+            this.value.toLowerCase().trim();
+
+        hiddenInput.value = "";
+
+        resultsBox.innerHTML = "";
+
+        if (!search) {
+
+            resultsBox.style.display = "none";
+
+            return;
+
+        }
+
+
+        let found = false;
+
+
+        items.forEach(function (item) {
+
+            const name =
+                item.dataset.name;
+
+            const display =
+                item.dataset.display;
+
+
+            if (
+                name.includes(search) ||
+                display.toLowerCase().includes(search)
+            ) {
+
+                const result =
+                    document.createElement("div");
+
+                result.className =
+                    "search-result-item";
+
+                result.textContent =
+                    display;
+
+                result.dataset.id =
+                    item.dataset.id;
+
+
+                result.addEventListener(
+                    "click",
+                    function () {
+
+                        searchInput.value =
+                            display;
+
+                        hiddenInput.value =
+                            this.dataset.id;
+
+                        resultsBox.style.display =
+                            "none";
+
+                    }
+                );
+
+
+                resultsBox.appendChild(result);
+
+                found = true;
+
+            }
+
+        });
+
+
+        resultsBox.style.display =
+            found ? "block" : "none";
+
+    });
+
+
+    document.addEventListener("click", function (event) {
+
+        if (
+            !searchInput.contains(event.target) &&
+            !resultsBox.contains(event.target)
+        ) {
+
+            resultsBox.style.display = "none";
+
+        }
+
+    });
+
+
+    document.querySelector("form").addEventListener(
+        "submit",
+        function (event) {
+
+            if (!hiddenInput.value) {
+
+                event.preventDefault();
+
+                alert("Please select a constituency from the search results.");
+
+                searchInput.focus();
+
+            }
+
+        }
+    );
+
+});
+
 </script>
 
 
