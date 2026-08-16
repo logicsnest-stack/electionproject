@@ -91,14 +91,16 @@ class Candidate(models.Model):
         null=True
     )
 
+    # MANUAL NATIONAL TOTAL
+    total_votes = models.PositiveBigIntegerField(
+        default=0
+    )
+
     class Meta:
 
         indexes = [
-
             models.Index(fields=['name']),
-
             models.Index(fields=['party']),
-
         ]
 
     def __str__(self):

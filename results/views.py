@@ -33,11 +33,6 @@ def home(request):
 
     national_results = Candidate.objects.select_related(
         'party'
-    ).annotate(
-        total_votes=Coalesce(
-            Sum('results__votes'),
-            Value(0)
-        )
     ).order_by(
         '-total_votes',
         'name'

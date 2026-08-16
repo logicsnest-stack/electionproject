@@ -16,7 +16,22 @@ from .models import (
 admin.site.register(Province)
 admin.site.register(Constituency)
 admin.site.register(Party)
-admin.site.register(Candidate)
+@admin.register(Candidate)
+class CandidateAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'party',
+        'total_votes',
+    )
+
+    list_editable = (
+        'total_votes',
+    )
+
+    search_fields = (
+        'name',
+        'party__name',
+    )
 admin.site.register(Result)
 admin.site.register(Sponsor)
 admin.site.register(NewsUpdate)
